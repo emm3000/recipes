@@ -8,7 +8,7 @@
     "seed": "ts-node src/seeder/seeder.ts",
     "dev": "nodemon src/index.ts --exec ts-node",
     "build": "tsc",
-    "start": "rimraf dist && npm run build && node dist/index.js"
+    "start": "rimraf dist && rimraf prisma/generated && npm run prisma && npm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "",

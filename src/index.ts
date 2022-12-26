@@ -5,31 +5,6 @@ import cors from 'cors'
 import { ConfigServer } from './config/config'
 import { RecipeRouter } from './recipe/recipe.route'
 
-// const app: express.Application = express()
-
-// app.get('/', async (req, res) => {
-//   const model = await prisma.recipe.findMany({
-//     include: {
-//       ingredients: true,
-//       preparation: true
-//     }
-//   })
-  
-//   const mapped = model.map(el => {
-//     return { 
-//       ...el,
-//       ingredients: el.ingredients.map(y => y.text),
-//       preparation: el.ingredients.map(y => y.text)
-//     }
-//   })
-  
-//   res.json(mapped)
-// })
-
-// app.listen('3000', () => {
-//   console.log('Server running on port 3000')
-// })
-
 class ServerBoostrap extends ConfigServer {
   public app: express.Application = express()
   private port: number = this.getNumberEnv('PORT')
