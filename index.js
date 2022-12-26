@@ -27,25 +27,25 @@ async function fetchRecipe (url, index) {
   const preparation = []
 
   $('.entry-content ul').first().find('li').each((i, el) => {
-    ingredients.push($(el).text().trim())
+    ingredients.push($(el).text().trim().replace(/\u00A0/, ''))
   })
 
   $('.entry-content ol li').each((i, el) => {
-    preparation.push($(el).text().trim())
+    preparation.push($(el).text().trim().replace(/\u00A0/, ''))
   })
   const image = $('.entry-content figure picture img').first().attr('data-lazy-src')
 
   const obje = {
     code: uuidv4(),
     id: index,
-    title: $('.entry-title').text(),
+    title: $('.entry-title').text().replace(/\u00A0/, ''),
     time: '',
     portions: '',
     ingredients,
     preparation,
     latitude: '',
     longitude: '',
-    urlImage: image
+    urlImage: image ?? ''
   }
   return obje
 
@@ -57,12 +57,12 @@ async function main () {
   const b = await Promise.all(linkList.map((e, index) => fetchRecipe(e, index)))
 
   try {
-    fs.writeFileSync('user2.json', JSON.stringify(b, null, 2))
+    fs.writeFileSync('user3.json', JSON.stringify(b, null, 2))
   } catch (error) {
     console.error(`x-> ${error.message}`)
   }
 
 }
 
-// fetchPage(URL)
+// fetchRecipe('https://www.comeperuano.pe/receta-de-tallarines-verdes/', 1)
 main()
